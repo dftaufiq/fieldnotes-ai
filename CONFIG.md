@@ -74,11 +74,13 @@ The app implements the standard setup in `src/firebase.js`:
    `"APPCHECK_SITE_KEY"` placeholder, and rebuild. On non-localhost origins
    the app then initialises App Check with `ReCaptchaEnterpriseProvider`.
 
-> ⏳ **Status for this project:** the site key is still being created, so
-> `appCheckSiteKey` currently holds the placeholder `"APPCHECK_SITE_KEY"`.
-> Until the real key is pasted in, the app automatically runs in
-> **debug-token mode** (below) on every origin, so a registered debug token
-> keeps everything working in the meantime.
+> ✅ **Status for this project:** the reCAPTCHA Enterprise site key is
+> registered in the Firebase console for the production domains
+> (`dftaufiq.github.io`, the Firebase Hosting domains, and `localhost`) and
+> is wired in as `appCheckSiteKey` in `src/firebase-config.js`. On
+> non-localhost origins the app initialises App Check with
+> `ReCaptchaEnterpriseProvider`; on localhost it uses debug-token mode
+> (below).
 
 **Local development — debug-token mode (automatic on localhost):**
 
@@ -153,3 +155,26 @@ npm run preview  # serve the production build locally
 ```
 
 Deploy `dist/` to any static host — Firebase Hosting, GitHub Pages, Netlify…
+
+## 8. GitHub Pages deployment (the live demo)
+
+The live demo runs on GitHub Pages from the `gh-pages` branch of
+[dftaufiq/fieldnotes-ai](https://github.com/dftaufiq/fieldnotes-ai):
+**https://dftaufiq.github.io/fieldnotes-ai/**
+
+Pages serves the app from the `/fieldnotes-ai/` subpath, so this deployment
+uses a dedicated build mode (see `vite.config.js`):
+
+```bash
+npm run build:pages   # vite build --mode pages → base "/fieldnotes-ai/"
+```
+
+The default `npm run build` keeps base `/` for root deployments (Firebase
+Hosting etc.). Supporting details already in the code: public-asset
+references in `index.html` and the web manifest are relative, the service
+worker is registered via `import.meta.env.BASE_URL`, and `public/sw.js`
+resolves its shell URLs against its own scope — so both base paths work
+without further changes.
+
+To redeploy: run `npm run build:pages`, then publish the contents of `dist/`
+(including the `.nojekyll` file) to the `gh-pages` branch.

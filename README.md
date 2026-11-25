@@ -2,6 +2,10 @@
 
 **Notes that think, even off the grid.**
 
+🔗 **Live demo: [dftaufiq.github.io/fieldnotes-ai](https://dftaufiq.github.io/fieldnotes-ai/)**
+
+🏆 Built for the **[#BuildHybridAI 2026](https://firebasehybridaihackathon.devpost.com/)** hackathon on Devpost (Google / Firebase) — hybrid AI apps that run on-device *and* in the cloud with Firebase AI Logic.
+
 FieldNotes AI is an offline-first AI notes app for the people who work where
 connectivity is unreliable — field technicians, drivers, farmers, surveyors,
 students. Capture a note anywhere; the AI routes itself:
