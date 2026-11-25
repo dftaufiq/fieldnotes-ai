@@ -299,5 +299,9 @@ startSync(); // no-op in demo mode
 
 // Offline shell (production builds only — avoids dev-server caching pain).
 if (import.meta.env.PROD && "serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
+  // BASE_URL keeps this correct both at a domain root ("/sw.js") and under a
+  // subpath such as GitHub Pages ("/fieldnotes-ai/sw.js").
+  navigator.serviceWorker
+    .register(import.meta.env.BASE_URL + "sw.js")
+    .catch(() => {});
 }
