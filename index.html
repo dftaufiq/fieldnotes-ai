@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1220" />
+    <meta
+      name="description"
+      content="FieldNotes AI — offline-first AI notes for people who work where connectivity is unreliable. Short notes are summarised on-device with Gemini Nano; long documents go to the cloud. Powered by Firebase AI Logic hybrid inference."
+    />
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <title>FieldNotes AI — Notes that think, even off the grid</title>
+    <script type="module" crossorigin src="/fieldnotes-ai/assets/index-CBS1jnGw.js"></script>
+    <link rel="stylesheet" crossorigin href="/fieldnotes-ai/assets/index-CIwe2rse.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="icon.svg" alt="" class="brand-mark" />
+        <div>
+          <div class="brand-name">FieldNotes AI</div>
+          <div class="brand-tag">Hybrid AI · on-device + cloud</div>
+        </div>
+      </div>
+      <div class="topbar-status">
+        <span id="mode-badge" class="pill pill-demo">Demo mode</span>
+        <span id="device-status" class="pill pill-neutral">Checking on-device AI…</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Notes that think, even off the grid.</h1>
+      <p class="hero-sub">
+        FieldNotes AI is built for the people who keep the world running where the signal
+        doesn't reach — field technicians, drivers, farmers, surveyors, students.
+        Capture a note anywhere. Short notes are summarised
+        <strong>on your device</strong> by Gemini Nano: private, free, and fully offline.
+        Long documents are handed to <strong>Gemini in the cloud</strong> for a deep summary.
+        One app, both brains — routed automatically by Firebase AI Logic hybrid inference.
+      </p>
+      <div class="route-cards">
+        <div class="route-card">
+          <div class="route-icon route-device">▣</div>
+          <h3>Short note → On-device</h3>
+          <p>Summaries &amp; action items run on Gemini Nano in Chrome. Nothing leaves the device, it costs nothing, and it works with no connection at all.</p>
+        </div>
+        <div class="route-card">
+          <div class="route-icon route-cloud">☁</div>
+          <h3>Long document → Cloud</h3>
+          <p>Reports that would overflow a small on-device model go straight to cloud Gemini for a structured deep summary: overview, key facts, risks, next steps.</p>
+        </div>
+        <div class="route-card">
+          <div class="route-icon route-auto">⇄</div>
+          <h3>Fallback → Automatic</h3>
+          <p>No on-device model? No problem. Firebase AI Logic falls back to the cloud seamlessly — and every AI result is badged with where it actually ran.</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="layout">
+      <aside class="notes-pane">
+        <div class="pane-head">
+          <h2>Your notes</h2>
+          <button id="new-note" class="btn btn-primary">+ New note</button>
+        </div>
+        <input id="search" type="search" placeholder="Search notes…" />
+        <div id="notes-list" class="notes-list"></div>
+        <p id="notes-empty" class="empty" hidden>
+          No notes yet. Write your first field note — it lives on this device and
+          works completely offline.
+        </p>
+      </aside>
+
+      <section class="editor-pane">
+        <div id="editor-empty" class="empty editor-empty">
+          <h3>Select a note, or start a new one</h3>
+          <p>Your notes are stored locally first. With a Firebase project connected, they also sync to Firestore and the AI features run live.</p>
+        </div>
+
+        <div id="editor" hidden>
+          <input id="note-title" type="text" placeholder="Note title" />
+          <div class="meta-row">
+            <span id="note-meta"></span>
+            <span id="route-hint" class="route-hint"></span>
+          </div>
+          <textarea id="note-body" placeholder="Write or paste your field note here…"></textarea>
+
+          <div class="ai-actions">
+            <button id="btn-summary" class="btn btn-ai">✦ Summarize</button>
+            <button id="btn-actions" class="btn btn-ai">☑ Extract action items</button>
+            <button id="btn-deep" class="btn btn-ai btn-cloud">☁ Deep summary · cloud</button>
+            <button id="btn-delete" class="btn btn-danger">Delete</button>
+          </div>
+          <p id="ai-status" class="ai-status" hidden></p>
+
+          <div id="ai-results"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Built with <strong>Firebase AI Logic</strong> hybrid inference —
+        <code>getGenerativeModel(ai, { mode: InferenceMode.PREFER_ON_DEVICE })</code> for short notes,
+        <code>ONLY_IN_CLOUD</code> for long documents. The badge on every result comes from
+        <code>response.inferenceSource</code>, reported by the SDK itself.
+        On-device inference needs Chrome 139+ on desktop with Gemini Nano.
+        Notes are local-first (localStorage) with optional Firestore sync.
+      </p>
+      <p>FieldNotes AI · Apache-2.0 · #BuildHybridAI 2026</p>
+    </footer>
+
+  </body>
+</html>
